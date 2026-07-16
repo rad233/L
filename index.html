@@ -16,6 +16,46 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
+    <!-- Firebase SDK -->
+    <script type="importmap">
+    {
+      "imports": {
+        "firebase/app": "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js",
+        "firebase/firestore": "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js"
+      }
+    }
+    </script>
+    <script type="module">
+      import { initializeApp } from "firebase/app";
+      import { initializeFirestore, collection, doc, setDoc, deleteDoc, onSnapshot, addDoc, getDocs } from "firebase/firestore";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyD_eC9QwOHo3JdpKlbshwHVeiIN0c0dMQA",
+        authDomain: "leather-2f259.firebaseapp.com",
+        projectId: "leather-2f259",
+        storageBucket: "leather-2f259.firebasestorage.app",
+        messagingSenderId: "98084565356",
+        appId: "1:98084565356:web:805eb44f78711ff52c8349",
+        measurementId: "G-HDB0K24900"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = initializeFirestore(app, {
+        experimentalForceLongPolling: true
+      });
+
+
+      // Expose helpers globally so non-module scripts can use them
+      window.firebaseDB = db;
+      window.firebaseCollection = collection;
+      window.firebaseDoc = doc;
+      window.firebaseSetDoc = setDoc;
+      window.firebaseDeleteDoc = deleteDoc;
+      window.firebaseOnSnapshot = onSnapshot;
+      window.firebaseAddDoc = addDoc;
+      window.firebaseGetDocs = getDocs;
+    </script>
+
     <script>
         tailwind.config = {
             darkMode: "class",
