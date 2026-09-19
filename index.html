@@ -1962,15 +1962,18 @@
 
         // Scroll to the details
 setTimeout(() => {
-    // 1. Get the exact position of the section relative to the page
-    const yOffset = -20; // Extra padding at top
-    const y = productDetailsSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    // Check if the user is on mobile
+    const isMobile = window.innerWidth <= 768;
 
-    // 2. Fallback smooth scroll that works reliably on both Desktop & Mobile touch
-    window.scrollTo({
-        top: y,
-        behavior: 'smooth'
-    });
+    if (isMobile) {
+        // Mobile-specific scroll fix
+        const yOffset = -20; 
+        const y = productDetailsSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+    } else {
+        // Untouched original code for laptop/desktop
+        productDetailsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 }, 150);
     }
 
