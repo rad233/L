@@ -1962,19 +1962,8 @@
 
         // Scroll to the details
 setTimeout(() => {
-    // Check if the user is on mobile
-    const isMobile = window.innerWidth <= 768;
-
-    if (isMobile) {
-        // Mobile-specific scroll fix
-        const yOffset = -20; 
-        const y = productDetailsSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-    } else {
-        // Untouched original code for laptop/desktop
-        productDetailsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-}, 150);
+    productDetailsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}, 100);
     }
 
     window.setModalImage = (index) => {
