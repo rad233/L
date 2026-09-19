@@ -1962,15 +1962,7 @@
 
         // Scroll to the details
 setTimeout(() => {
-    gsap.to(window, {
-        duration: 0.8,
-        scrollTo: {
-            y: productDetailsSection,
-            offsetY: 20, // Adds a little breathing room at the top
-            autoKill: false // CRITICAL: Prevents mobile touch gestures from cancelling the scroll
-        },
-        ease: "power2.out"
-    });
+    productDetailsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }, 100);
     }
 
