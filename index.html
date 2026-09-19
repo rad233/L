@@ -1962,8 +1962,16 @@
 
         // Scroll to the details
 setTimeout(() => {
-    productDetailsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}, 100);
+    // 1. Get the exact position of the section relative to the page
+    const yOffset = -20; // Extra padding at top
+    const y = productDetailsSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+    // 2. Fallback smooth scroll that works reliably on both Desktop & Mobile touch
+    window.scrollTo({
+        top: y,
+        behavior: 'smooth'
+    });
+}, 150);
     }
 
     window.setModalImage = (index) => {
