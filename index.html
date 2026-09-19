@@ -309,6 +309,7 @@
             max-width: 100vw;
             overflow: hidden;
             position: relative;
+            touch-action: pan-y;
         }
 
         .horiz-gallery-strip {
@@ -318,6 +319,7 @@
             height: 100%;
             align-items: center;
             width: max-content;
+            touch-action: pan-y;
         }
 
         .project-wrap {
@@ -383,16 +385,17 @@
             width: 100%;
             max-width: 100vw;
             overflow: hidden;
-            height: 24vw;
+            min-height: 35vw;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 4rem 0;
+            padding: 2rem 0;
         }
 
         @media (max-width: 768px) {
             .tube-container {
-                height: 40vw;
+                min-height: 40vw;
                 margin: 1rem 0;
             }
         }
@@ -400,7 +403,7 @@
         .tube {
             position: relative;
             width: 100%;
-            height: 24vw;
+            height: 100%;
         }
 
         .line {
@@ -1738,10 +1741,11 @@
                 scrub: true,
                 trigger: "#portfolio",
                 pin: true,
+                anticipatePin: 1,
+                allowTouchScrolling: true,
                 start: "top top",
                 end: () => `+=${pinWrapWidth}`,
                 invalidateOnRefresh: true,
-                anticipatePin: 1,
             },
             x: -horizontalScrollLength,
             ease: "none",
