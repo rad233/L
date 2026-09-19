@@ -1961,9 +1961,17 @@
         gsap.fromTo(productDetailsSection, { height: 0, opacity: 0 }, { height: "auto", opacity: 1, duration: 0.8, ease: "expo.out" });
 
         // Scroll to the details
-        setTimeout(() => {
-            productDetailsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 100);
+setTimeout(() => {
+    gsap.to(window, {
+        duration: 0.8,
+        scrollTo: {
+            y: productDetailsSection,
+            offsetY: 20, // Adds a little breathing room at the top
+            autoKill: false // CRITICAL: Prevents mobile touch gestures from cancelling the scroll
+        },
+        ease: "power2.out"
+    });
+}, 100);
     }
 
     window.setModalImage = (index) => {
