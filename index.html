@@ -1965,19 +1965,24 @@ setTimeout(() => {
     const isMobile = window.innerWidth <= 768;
 
     if (isMobile) {
-        // Mobile touch-safe scroll calculation
-        const yOffset = -20; // Extra breathing room at the top
-        const targetY = productDetailsSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        
+        // Calculate total page offset reliably even if parent containers transform
+        let topPos = 0;
+        let el = productDetailsSection;
+        while (el) {
+            topPos += el.offsetTop;
+            el = el.offsetParent;
+        }
+
+        // Instant scroll jump prevents mobile touch drivers from cancelling the move
         window.scrollTo({
-            top: targetY,
-            behavior: 'smooth'
+            top: topPos - 20,
+            behavior: 'auto'
         });
     } else {
         // Untouched original code for desktop/laptop
         productDetailsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-}, 150); // Slightly increased delay (150ms) so mobile layout recalculations finish before scrolling
+}, 250); // Increased to 250ms to allow the section height animation to completely finish unrolling
     }
 
     window.setModalImage = (index) => {
