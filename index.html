@@ -1965,24 +1965,20 @@ setTimeout(() => {
     const isMobile = window.innerWidth <= 768;
 
     if (isMobile) {
-        // Calculate total page offset reliably even if parent containers transform
-        let topPos = 0;
-        let el = productDetailsSection;
-        while (el) {
-            topPos += el.offsetTop;
-            el = el.offsetParent;
-        }
+        // 1. Give the details section an ID if it doesn't have one
+        productDetailsSection.setAttribute('id', 'mobile-product-details');
+        
+        // 2. Make it focusable and force mobile keyboard/screen focus
+        productDetailsSection.setAttribute('tabindex', '-1');
+        productDetailsSection.focus({ preventScroll: false });
 
-        // Instant scroll jump prevents mobile touch drivers from cancelling the move
-        window.scrollTo({
-            top: topPos - 20,
-            behavior: 'auto'
-        });
+        // 3. Native anchor fallback (bypasses JS scroll engines completely)
+        window.location.hash = '#mobile-product-details';
     } else {
-        // Untouched original code for desktop/laptop
+        // Desktop untouched
         productDetailsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-}, 250); // Increased to 250ms to allow the section height animation to completely finish unrolling
+}, 150);
     }
 
     window.setModalImage = (index) => {
